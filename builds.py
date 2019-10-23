@@ -16,7 +16,6 @@ opener=urllib.request.build_opener()
 opener.addheaders=[('User-Agent','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1941.0 Safari/537.36')]
 urllib.request.install_opener(opener)
 
-
 # parse hexstring into AT, primary, secondary
 def parseHex(hexstring):
 	hexbytes = bytearray.fromhex(hexstring)
@@ -47,6 +46,12 @@ def parseHex(hexstring):
 		sec1 = pri1[2].split('.')
 		sec = sec1[1].split('\\')[0].replace('_',' ')
 		sec = re.sub(r'[^\w ]', '', sec)
+	if pri == 'Brawling':
+		pri = 'Street Justice'
+	if sec == 'Brawling':
+		sec = 'Street Justice'
+	if pri == 'Quills':
+		pri = 'Spines'
 	print(at + ', ' + pri + ', ' + sec)
 
 	data = [at,pri,sec]
@@ -64,8 +69,8 @@ def parseTag(content): # not implemented yet
 def addBuild(message,parsed,url,hexstring,add):
 	if not add or not gsheet.find(hexstring): # if we're not adding to spreadsheet OR if it's not a duplicate
 		tag = ''
-		# if bot_tag in message.content:
-		# 	tag = parseTag(message.content)
+		if bot_tag in message.content:
+			tag = parseTag(message.content)
 
 		msg_link = message.jump_url
 		msg_time = str(message.created_at)
