@@ -117,18 +117,20 @@ def addBuild(message,parsed,url,hexstring,add):
 				writer.writerow(entry[0])
 
 
-def parseURL(message,add):
+def parseURL(message,add,hexonly=False):
 	hs1 = message.content.split(build_url)
 	hs2 = hs1[1].split('&dc=')
 	hs3 = hs2[1].split()
 	hexstring = hs3[0] # parse out the hex string from the url
 
+	if hexonly:
+		return hexstring
 	url = build_url + hs2[0] + '&dc=' + hexstring
 	parsed = parseHex(hexstring)
 	addBuild(message,parsed,url,hexstring,add) 
 
 
-def parseAttach(message,url,add):
+def parseAttach(message,url,add,hexonly=False):
 	data1 = str(urllib.request.urlopen(url).read())
 	# if in uncompressed format
 	if '\\n' in data1 or '\\r\\n' in data1:
@@ -141,6 +143,8 @@ def parseAttach(message,url,add):
 		data2 = data1.split('||')
 		data3 = data2[1].split('|')
 		hexstring = data3[0]
+	if hexonly:
+		return hexstring
 	parsed = parseHex(hexstring)
 	addBuild(message,parsed,url,hexstring,add)
 
@@ -167,5 +171,13 @@ def parseSearch(message,rated):
 		return embed_content
 	return False
 
-# def parseVote(message):
+def parseVote(message):
+	msg_time = str(message.created_at)
+	vote_count = 0
+	reactions = message.reactions
+	for r in reactions:
+		if str(r.emoji) == '💯':
+			vote_count = r.count
+			break
+	gsheet.updateVote(msg_time,vote_count)
 

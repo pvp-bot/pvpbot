@@ -98,12 +98,45 @@ async def on_message(message):
 			## not in use		
 			# elif '!kickball' in message.content:
 			# 	await message.channel.send('kickball weds and sat nights @ 6 pm pacific, check out the link for rules and more info \n<https://forums.homecomingservers.com/topic/1492-weekly-kickball-thread/>')
-			# elif '!pvpbot' in message.content:
-			# 	await message.channel.send('hi '+message.author.mention+', I parse builds posted here and add them to a spreadsheet\n**!link** to link spreadsheet\ninclude **!i** in your message to ignore adding a build to the spreadsheet' )
-			
+	elif message.channel.recipient:
+		print(str(message.channel.recipient))
+		if message.content.startswith('!search ') or message.content.startswith('!searchrated '):
+			rated = False
+			if message.content.startswith('!searchrated '):
+				rated = True
+			match = builds.parseSearch(message.content, rated)
+			if match == False:
+				return
+			else:
+				desc = "posted by " + match['author'] + " [" + match['comment_time'] + "](" + match['comment_url'] + ")"
+				auth = match['pri'] + "/" + match['sec'] + " " + match['at']
+				build_embed = discord.Embed(url=match['build_url'], description=desc)
+				build_embed.set_author(name=auth, url=match['build_url'], icon_url=match['at_icon'])
+				await message.channel.send(embed=build_embed)
+				return
+		
 
-# @client.event
-# async def on_reaction_add(reaction, user):
+@client.event
+async def on_raw_reaction_add(payload):
+	if payload.emoji.name == '💯':
+		for chan in client.get_all_channels():
+			if str(chan) == secrets.channel_name:
+				try:
+					msg = await chan.fetch_message(payload.message_id)
+					builds.parseVote(msg)
+				except:
+					continue
+
+@client.event
+async def on_raw_reaction_remove(payload):
+	if payload.emoji.name == '💯':
+		for chan in client.get_all_channels():
+			if str(chan) == secrets.channel_name:
+				try:
+					msg = await chan.fetch_message(payload.message_id)
+					builds.parseVote(msg)
+				except:
+					continue
 
 
 client.run(secrets.bot_token)
