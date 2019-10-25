@@ -136,10 +136,12 @@ def findBuild(at,pri,sec,rated):
 	if not values:
 		return False
 	else:
+		found = False
 		for row in values:
 			try:
 				if at in row[2].lower() and pri in row[3].lower() and sec in row[4].lower():
 					if int(row[8]) > vote:
+						found = True
 						vote = int(row[8])
 						emb['author'] 		= row[0]
 						emb['comment_time'] = row[1][0:10]
@@ -152,9 +154,12 @@ def findBuild(at,pri,sec,rated):
 							return emb
 			except:
 				continue
-		return emb
-		
-		print('No exact match found')
+		if found:
+			return emb
+		else:
+			print('No exact match found')
+			return False
+
 	return False
 
 def add(entry):
