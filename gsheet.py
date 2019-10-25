@@ -10,10 +10,11 @@ import secrets
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
-RANGE_NAME = 'DB!A10:N10'
-HEX_RANGE = 'DB!N10:N1000'
+INSERT_RANGE = 'DB!A10:N10'
+HEX_RANGE 	 = 'DB!N10:N1000'
+SEARCH_RANGE = 'DB!A10:N1000' # need to increase if we start getting to 1000
 
-def find(hexstring):
+def findHex(hexstring):
 	creds = None
 	# The file token.pickle stores the user's access and refresh tokens, and is created automatically when the authorization flow completes for the first time.
 	if os.path.exists('token.pickle'):
@@ -49,6 +50,59 @@ def find(hexstring):
 		
 		print('No duplicate found.')
 		return False
+
+def findBuild(at,pri,sec,rated):
+	creds = None
+	# The file token.pickle stores the user's access and refresh tokens, and is created automatically when the authorization flow completes for the first time.
+	if os.path.exists('token.pickle'):
+		with open('token.pickle', 'rb') as token:
+			creds = pickle.load(token)
+	# If there are no (valid) credentials available, let the user log in.
+	if not creds or not creds.valid:
+		if creds and creds.expired and creds.refresh_token:
+			creds.refresh(Request())
+		else:
+			flow = InstalledAppFlow.from_client_secrets_file(
+				'credentials.json', SCOPES)
+			creds = flow.run_local_server(port=0)
+		# Save the credentials for the next run
+		with open('token.pickle', 'wb') as token:
+			pickle.dump(creds, token)
+
+	service = build('sheets', 'v4', credentials=creds)
+	# Call the Sheets API
+	sheet 	= service.spreadsheets()
+	result = sheet.values().get(spreadsheetId=secrets.sheets_id,
+								range=SEARCH_RANGE).execute()
+	values = result.get('values', [])
+
+	emb = {
+		'at':'','pri':'','sec':'','build_url':'',
+		'author':'','comment_url':'','comment_time':''
+	}
+	vote = -1
+
+	if not values:
+		return False
+	else:
+		for row in values:
+			if at in row[2].lower() and pri in row[3].lower() and sec in row[4].lower():
+				if int(row[8]) > vote:
+					vote = int(row[8])
+					emb['author'] 		= row[0]
+					emb['comment_time'] = row[1][0:10]
+					emb['at'] 			= row[2]
+					emb['pri'] 			= row[3]
+					emb['sec'] 			= row[4]
+					emb['build_url'] 	= row[11]
+					emb['comment_url'] 	= row[12]
+					if not rated:
+						return emb
+		return emb
+		
+		print('No exact match found')
+	return False
+
 
 def add(entry):
 
@@ -96,5 +150,5 @@ def add(entry):
 		'values': entry
 	}
 	result 	= service.spreadsheets().values().update(
-			  spreadsheetId=secrets.sheets_id, range=RANGE_NAME,
+			  spreadsheetId=secrets.sheets_id, range=INSERT_RANGE,
 			  valueInputOption='USER_ENTERED', body=body,).execute()

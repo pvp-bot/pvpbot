@@ -4,14 +4,12 @@ import discord # discord bot
 import sys
 
 import builds
-from secrets import bot_token
+import secrets
 
-# 'constants'
-channel_name = 'build-discussion'
-# channel_name = 'test-chan'
 
 # bot commands
 bot_ignore = '!i'
+bot_builds = '!builds'
 
 client = discord.Client()
 
@@ -22,7 +20,7 @@ async def dlAll(dl_num=None):
 	channels = client.get_all_channels()
 	counter = 0	
 	for chan in channels:
-		if str(chan.type) == 'text' and chan.name == channel_name:
+		if str(chan.type) == 'text' and chan.name == secrets.channel_name:
 			csv_data = []
 			messages = await chan.history(limit=dl_num).flatten()
 			for message in messages:
@@ -60,11 +58,11 @@ async def on_ready():
 async def on_message(message):
 	# ignore messages from ourself
 	msg_author = message.author
-	if msg_author == client.user:
+	if msg_author == client.user: # or str(msg_author) == 'Fire Wire#1104' # ;)
 		return
 
 	# if not bot_ignore in message.content and correct channel:
-	if str(message.channel) == channel_name and not bot_ignore in message.content:
+	if str(message.channel) == secrets.channel_name and not bot_ignore in message.content:
 		if builds.build_url in message.content: # if message contains a build
 			builds.parseURL(message,True)
 
@@ -73,18 +71,39 @@ async def on_message(message):
 				if a.filename.endswith(builds.build_suf):
 					builds.parseAttach(message,a.url,True)
 					break
+		
 		# bot messages		
-		else:
-			# no build in message
+		else: # no build in message
+			
+			# link to spreadsheet
 			if '!builds' in message.content:
 				await message.channel.send(message.author.mention+' <http://bit.do/pvpbuilds>')
-				# RARE await message.channel.send(message.author.mention+' <https://docs.google.com/spreadsheets/d/'+secrets.sheets_id+'/edit#gid='+secrets.sheets_num+'>')
+			
+			# find matching build
+			elif message.content.startswith('!search ') or message.content.startswith('!searchrated '):
+				rated = False
+				if message.content.startswith('!searchrated '):
+					rated = True
+				match = builds.parseSearch(message.content, rated)
+				if match == False:
+					return
+				else:
+					desc = "posted by " + match['author'] + " [" + match['comment_time'] + "](" + match['comment_url'] + ")"
+					auth = match['pri'] + "/" + match['sec'] + " " + match['at']
+					build_embed = discord.Embed(url=match['build_url'], description=desc)
+					build_embed.set_author(name=auth, url=match['build_url'], icon_url=match['at_icon'])
+					await message.channel.send(embed=build_embed)
+					return
+			
+			## not in use		
 			# elif '!kickball' in message.content:
 			# 	await message.channel.send('kickball weds and sat nights @ 6 pm pacific, check out the link for rules and more info \n<https://forums.homecomingservers.com/topic/1492-weekly-kickball-thread/>')
 			# elif '!pvpbot' in message.content:
 			# 	await message.channel.send('hi '+message.author.mention+', I parse builds posted here and add them to a spreadsheet\n**!link** to link spreadsheet\ninclude **!i** in your message to ignore adding a build to the spreadsheet' )
 			
 
-		
+# @client.event
+# async def on_reaction_add(reaction, user):
 
-client.run(bot_token) # Add bot token here
+
+client.run(secrets.bot_token)
