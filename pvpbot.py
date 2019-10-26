@@ -80,10 +80,10 @@ async def on_message(message):
 				await message.channel.send(message.author.mention+' <http://bit.do/pvpbuilds>')
 			
 			# find matching build
-			elif message.content.startswith('!search ') or message.content.startswith('!searchrated '):
-				rated = False
-				if message.content.startswith('!searchrated '):
-					rated = True
+			elif message.content.startswith('!search ') or message.content.startswith('!searchall '):
+				rated = True
+				if message.content.startswith('!searchall '):
+					rated = False
 				match = builds.parseSearch(message.content, rated)
 				if match == False:
 					return
@@ -98,14 +98,17 @@ async def on_message(message):
 			## not in use		
 			# elif '!kickball' in message.content:
 			# 	await message.channel.send('kickball weds and sat nights @ 6 pm pacific, check out the link for rules and more info \n<https://forums.homecomingservers.com/topic/1492-weekly-kickball-thread/>')
-	elif message.channel.recipient:
-		print(str(message.channel.recipient))
-		if message.content.startswith('!search ') or message.content.startswith('!searchrated '):
-			rated = False
-			if message.content.startswith('!searchrated '):
-				rated = True
+	
+	# DM bot directly
+	elif str(message.channel.type) == 'private':
+		print(str(message.channel.recipient)+': '+message.content)
+		if message.content.startswith('!search ') or message.content.startswith('!searchall '):
+			rated = True
+			if message.content.startswith('!searchall '):
+				rated = False
 			match = builds.parseSearch(message.content, rated)
 			if match == False:
+				print('')
 				return
 			else:
 				desc = "posted by " + match['author'] + " [" + match['comment_time'] + "](" + match['comment_url'] + ")"
@@ -113,7 +116,11 @@ async def on_message(message):
 				build_embed = discord.Embed(url=match['build_url'], description=desc)
 				build_embed.set_author(name=auth, url=match['build_url'], icon_url=match['at_icon'])
 				await message.channel.send(embed=build_embed)
+				print('')
 				return
+		elif '!builds' in message.content:
+			await message.channel.send(message.author.mention+' <http://bit.do/pvpbuilds>')
+
 		
 
 @client.event

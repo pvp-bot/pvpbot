@@ -15,27 +15,29 @@ HEX_RANGE 	 = 'DB!N10:N1000'
 SEARCH_RANGE = 'DB!A10:N1000' # need to increase if we start getting to 1000
 TIME_RANGE 	 = 'DB!B10:B1000'
 
-def updateVote(time,votes):
-	creds = None
-	# The file token.pickle stores the user's access and refresh tokens, and is created automatically when the authorization flow completes for the first time.
-	if os.path.exists('token.pickle'):
-		with open('token.pickle', 'rb') as token:
-			creds = pickle.load(token)
-	# If there are no (valid) credentials available, let the user log in.
-	if not creds or not creds.valid:
-		if creds and creds.expired and creds.refresh_token:
-			creds.refresh(Request())
-		else:
-			flow = InstalledAppFlow.from_client_secrets_file(
-				'credentials.json', SCOPES)
-			creds = flow.run_local_server(port=0)
-		# Save the credentials for the next run
-		with open('token.pickle', 'wb') as token:
-			pickle.dump(creds, token)
+creds = None
+# The file token.pickle stores the user's access and refresh tokens, and is created automatically when the authorization flow completes for the first time.
+if os.path.exists('token.pickle'):
+	with open('token.pickle', 'rb') as token:
+		creds = pickle.load(token)
+# If there are no (valid) credentials available, let the user log in.
+if not creds or not creds.valid:
+	if creds and creds.expired and creds.refresh_token:
+		creds.refresh(Request())
+	else:
+		flow = InstalledAppFlow.from_client_secrets_file(
+			'credentials.json', SCOPES)
+		creds = flow.run_local_server(port=0)
+	# Save the credentials for the next run
+	with open('token.pickle', 'wb') as token:
+		pickle.dump(creds, token)
 
-	service = build('sheets', 'v4', credentials=creds)
-	# Call the Sheets API
-	sheet 	= service.spreadsheets()
+service = build('sheets', 'v4', credentials=creds)
+# Call the Sheets API
+sheet 	= service.spreadsheets()
+
+def updateVote(time,votes):
+
 	result = sheet.values().get(spreadsheetId=secrets.sheets_id,
 								range=TIME_RANGE).execute()
 	values = result.get('values', [])
@@ -64,26 +66,6 @@ def updateVote(time,votes):
 		  valueInputOption='USER_ENTERED', body=body,).execute()
 
 def findHex(hexstring):
-	creds = None
-	# The file token.pickle stores the user's access and refresh tokens, and is created automatically when the authorization flow completes for the first time.
-	if os.path.exists('token.pickle'):
-		with open('token.pickle', 'rb') as token:
-			creds = pickle.load(token)
-	# If there are no (valid) credentials available, let the user log in.
-	if not creds or not creds.valid:
-		if creds and creds.expired and creds.refresh_token:
-			creds.refresh(Request())
-		else:
-			flow = InstalledAppFlow.from_client_secrets_file(
-				'credentials.json', SCOPES)
-			creds = flow.run_local_server(port=0)
-		# Save the credentials for the next run
-		with open('token.pickle', 'wb') as token:
-			pickle.dump(creds, token)
-
-	service = build('sheets', 'v4', credentials=creds)
-	# Call the Sheets API
-	sheet 	= service.spreadsheets()
 	result = sheet.values().get(spreadsheetId=secrets.sheets_id,
 								range=HEX_RANGE).execute()
 	values = result.get('values', [])
@@ -103,26 +85,6 @@ def findHex(hexstring):
 		return False
 
 def findBuild(at,pri,sec,rated):
-	creds = None
-	# The file token.pickle stores the user's access and refresh tokens, and is created automatically when the authorization flow completes for the first time.
-	if os.path.exists('token.pickle'):
-		with open('token.pickle', 'rb') as token:
-			creds = pickle.load(token)
-	# If there are no (valid) credentials available, let the user log in.
-	if not creds or not creds.valid:
-		if creds and creds.expired and creds.refresh_token:
-			creds.refresh(Request())
-		else:
-			flow = InstalledAppFlow.from_client_secrets_file(
-				'credentials.json', SCOPES)
-			creds = flow.run_local_server(port=0)
-		# Save the credentials for the next run
-		with open('token.pickle', 'wb') as token:
-			pickle.dump(creds, token)
-
-	service = build('sheets', 'v4', credentials=creds)
-	# Call the Sheets API
-	sheet 	= service.spreadsheets()
 	result = sheet.values().get(spreadsheetId=secrets.sheets_id,
 								range=SEARCH_RANGE).execute()
 	values = result.get('values', [])
@@ -163,28 +125,6 @@ def findBuild(at,pri,sec,rated):
 	return False
 
 def add(entry):
-
-	creds = None
-	# The file token.pickle stores the user's access and refresh tokens, and is created automatically when the authorization flow completes for the first time.
-	if os.path.exists('token.pickle'):
-		with open('token.pickle', 'rb') as token:
-			creds = pickle.load(token)
-	# If there are no (valid) credentials available, let the user log in.
-	if not creds or not creds.valid:
-		if creds and creds.expired and creds.refresh_token:
-			creds.refresh(Request())
-		else:
-			flow = InstalledAppFlow.from_client_secrets_file(
-				'credentials.json', SCOPES)
-			creds = flow.run_local_server(port=0)
-		# Save the credentials for the next run
-		with open('token.pickle', 'wb') as token:
-			pickle.dump(creds, token)
-
-	service = build('sheets', 'v4', credentials=creds)
-	# Call the Sheets API
-	sheet 	= service.spreadsheets()
-
 	rowrange = {"sheetId": secrets.sheets_num,"startRowIndex": 9,"endRowIndex": 10,"startColumnIndex": 0,"endColumnIndex": 14}
 	requests = []
 	requests.append({

@@ -28,8 +28,12 @@ at_icons = {
 	'Arachnos Soldier':'https://i.imgur.com/6gfIqT6.png'
 }
 
-aliases = {
-	'mm':'Mastermind'
+aliases_at = {
+	'mm':'Mastermind',
+	'ws':'Warshade'
+}
+aliases_pri = {
+	'ss':'Super'
 }
 
 # change request header so Discord doesn't 403 the urlrequests
@@ -150,8 +154,8 @@ def parseAttach(message,url,add,hexonly=False):
 
 def parseSearch(message,rated):
 	search_split = '!search '
-	if rated:
-		search_split = '!searchrated '
+	if not rated:
+		search_split = '!searchall '
 	parse = message.split(search_split)[1].split()
 	if len(parse) == 0:
 		return False
