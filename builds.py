@@ -30,10 +30,17 @@ at_icons = {
 
 aliases_at = {
 	'mm':'Mastermind',
-	'ws':'Warshade'
+	'ws':'Warshade',
+	'crab':'Soldier'
 }
-aliases_pri = {
-	'ss':'Super'
+aliases_pow = {
+	'ss':'Super',
+	'sj':'Street',
+	# 'ea':'Energy Aura', 
+	'wp':'Willpower', 
+	# 'em':'Energy Melee'
+	'ff':'Force Field',
+	# 'ta':'Trick'
 }
 
 # change request header so Discord doesn't 403 the urlrequests
@@ -152,11 +159,21 @@ def parseAttach(message,url,add,hexonly=False):
 	parsed = parseHex(hexstring)
 	addBuild(message,parsed,url,hexstring,add)
 
+def parseAliases(at,pri,sec):
+	if at in aliases_at:	
+		at = aliases_at[at]
+	if pri in aliases_pow:
+		pri = aliases_pow[pri]
+	if sec in aliases_pow:
+		sec = aliases_pow[sec]
+	return [at,pri,sec]
+
 def parseSearch(message,rated):
 	search_split = '!search '
 	if not rated:
 		search_split = '!searchall '
 	parse = message.split(search_split)[1].split()
+
 	if len(parse) == 0:
 		return False
 	elif len(parse) == 1: # only searching for AT
@@ -168,6 +185,11 @@ def parseSearch(message,rated):
 	for i in range(len(parse)):
 		if parse[i] == '*': # i.e. blank in search
 			parse[i] = ''
+
+	# aliases
+	parse = parseAliases(parse[0],parse[1],parse[2])
+
+
 	print('search string: ' + parse[0] + ', '+ parse[1] + ', '+ parse[2])
 	embed_content = gsheet.findBuild(parse[0].lower(),parse[1].lower(),parse[2].lower(),rated)
 	if embed_content:

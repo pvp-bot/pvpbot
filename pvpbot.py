@@ -52,7 +52,15 @@ async def on_ready():
 		await dlAll(dl_num)	
 		return
 
-
+def buildEmbed(match):
+	desc = "posted by " + match['author'] + " [" + match['comment_time'] + "](" + match['comment_url'] + ")"
+	# desc = desc + "\nfound in the [pvp discord build spreadsheet](https://docs.google.com/spreadsheets/d/1FNejy_CHV4Khr9dy3m7wn8-J0OARwrSbHcKmkBRuG1Y/edit#gid=0)"
+	auth = match['pri'] + "/" + match['sec'] + " " + match['at']
+	if match['at'] == 'Peacebringer' or match['at'] == 'Warshade' or match['at'] == 'Arachnos Soldier' or match['at'] == 'Arachnos Widow':
+		auth = match['at']
+	build_embed = discord.Embed(url=match['build_url'], description=desc)
+	build_embed.set_author(name=auth, url=match['build_url'], icon_url=match['at_icon'])
+	return build_embed
 
 @client.event
 async def on_message(message):
@@ -85,15 +93,10 @@ async def on_message(message):
 				if message.content.startswith('!searchall '):
 					rated = False
 				match = builds.parseSearch(message.content, rated)
-				if match == False:
-					return
-				else:
-					desc = "posted by " + match['author'] + " [" + match['comment_time'] + "](" + match['comment_url'] + ")"
-					auth = match['pri'] + "/" + match['sec'] + " " + match['at']
-					build_embed = discord.Embed(url=match['build_url'], description=desc)
-					build_embed.set_author(name=auth, url=match['build_url'], icon_url=match['at_icon'])
-					await message.channel.send(embed=build_embed)
-					return
+				if not match == False:
+					await message.channel.send(embed=buildEmbed(match))
+				print('')
+				return
 			
 			## not in use		
 			# elif '!kickball' in message.content:
@@ -107,19 +110,12 @@ async def on_message(message):
 			if message.content.startswith('!searchall '):
 				rated = False
 			match = builds.parseSearch(message.content, rated)
-			if match == False:
-				print('')
-				return
-			else:
-				desc = "posted by " + match['author'] + " [" + match['comment_time'] + "](" + match['comment_url'] + ")"
-				auth = match['pri'] + "/" + match['sec'] + " " + match['at']
-				build_embed = discord.Embed(url=match['build_url'], description=desc)
-				build_embed.set_author(name=auth, url=match['build_url'], icon_url=match['at_icon'])
-				await message.channel.send(embed=build_embed)
-				print('')
-				return
+			if not match == False:
+				await message.channel.send(embed=buildEmbed(match))
 		elif '!builds' in message.content:
 			await message.channel.send(message.author.mention+' <http://bit.do/pvpbuilds>')
+		print('')
+		return
 
 		
 
