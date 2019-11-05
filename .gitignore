@@ -8,3 +8,7 @@ credentials.json
 secrets.py
 
 token.pickle
+
+archive/
+
+mnu/

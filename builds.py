@@ -5,6 +5,7 @@ import gsheet
 import zlib # decompressing hex
 import re
 import csv
+import json
 
 # bot_tag = "!t "
 build_url = "http://www.cohplanner.com/mids/download.php" # to match in comments
@@ -207,3 +208,50 @@ def parseVote(message):
 			break
 	gsheet.updateVote(msg_time,vote_count)
 
+
+def buildPop(url):
+	mxd = urllib.request.urlopen(url)
+
+	if not 'Mids\'' in str(mxd.read().decode('utf8')):
+		return False
+	with open('enh.json') as e:
+		data = json.load(e)
+		
+		string1 = '' # first 70
+		string2 = '' # remainder
+		
+		mxd = urllib.request.urlopen(url)
+		line = str(mxd.readline().decode('utf8'))
+		while not '------------' in line:
+			line = str(mxd.readline().decode('utf8'))
+		line = str(mxd.readline().decode('utf8'))
+		count = 0
+		while not '------------' in line:
+			split = line.split("\t")[-1]
+			split = re.sub(r'\([^)]*\)', '', split)
+			split = re.sub(r'\n', '', split)
+			split = re.sub(r'\r', '', split)
+
+			split = split.split(', ')
+			
+			for i in split:
+				if i != '' and i != 'Empty':
+					if count<70:
+						string1 = string1 + '$$boost '+data[i]['UID']+' '+data[i]['UID']+' '+'50' #str(data[i]['LevelMax'])
+					else:
+						string2 = string2 + '$$boost '+data[i]['UID']+' '+data[i]['UID']+' '+'50' #str(data[i]['LevelMax'])
+					count = count + 1
+			line = str(mxd.readline().decode('utf8'))
+		print(str(count)+' enhancements total')
+
+		with open('mnu/mxd.mnu',mode='w') as menu:
+			menu.write('//POPMENU generated from Mids .mxd file\n')
+			menu.write('Menu "mxd"\n')
+			menu.write('{\n')
+			menu.write('\tDivider\n')
+			menu.write('\tTitle "Enhancements for Mids build"\n')
+			menu.write('\tOption "Step 1) lvl up" "levelup_xp 50"\n')
+			menu.write('\tOption "Step 2) first 70 enh" "'+string1+'"\n')
+			menu.write('\tOption "Step 3) remaining enh" "'+string2+'"\n')
+			menu.write('}')
+		return True

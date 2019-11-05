@@ -114,6 +114,16 @@ async def on_message(message):
 				await message.channel.send(embed=buildEmbed(match))
 		elif '!builds' in message.content:
 			await message.channel.send(message.author.mention+' <http://bit.do/pvpbuilds>')
+		# elif '!test' in message.content and len(message.attachments) > 0:
+		# 	for a in message.attachments:
+		# 		if a.filename.endswith(builds.build_suf):
+		# 			ret = builds.buildPop(a.url)
+		# 			if ret:
+		# 				print('popmenu sent')
+		# 				await message.channel.send('',file=discord.File('mnu/mxd.mnu'))
+		# 			else:
+		# 				print('bad build format')
+		# 			break
 		print('')
 		return
 
