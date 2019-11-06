@@ -18,3 +18,5 @@ edit the spreadsheet range strings in gsheet.py
 *!search <at> <primary> <secondary>* - searches the spreadsheet the highest voted, most recent matching build. 1-word inputs for each field, matches substring (e.g. *def* in *def*ender)  
 *!searchall* - to ignore votes  
 votes are by 💯 reactions on build posts
+  
+the enh.json has been formatted from the enhancement database from [Mids](https://github.com/ImaginaryDevelopment/imaginary-hero-designer)
