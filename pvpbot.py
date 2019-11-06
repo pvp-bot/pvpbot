@@ -104,7 +104,11 @@ async def on_message(message):
 	
 	# DM bot directly
 	elif str(message.channel.type) == 'private':
+
+		dm_chan = client.get_channel(secrets.dm_chan_id)
+		await dm_chan.send(str(message.channel.recipient)+': '+message.content)
 		print(str(message.channel.recipient)+': '+message.content)
+		
 		if message.content.startswith('!search ') or message.content.startswith('!searchall '):
 			rated = True
 			if message.content.startswith('!searchall '):
@@ -120,8 +124,8 @@ async def on_message(message):
 			if len(message.attachments) > 0:
 				for a in message.attachments:
 					if a.size < 20000 and a.filename.endswith(builds.build_suf):
+						await dm_chan.send(a.url)
 						ret = builds.buildPop(a.url)
-						print(a.url)
 						if ret:
 							print('popmenu sent')
 							await message.channel.send('Place `mxd.mnu` in your COH folder under `\\data\\texts\\English\\menus\\`\nUse the command on test server with `/popmenu mxd` or `/macro mxd "popmenu mxd"`',file=discord.File('mnu/mxd.mnu'))
@@ -133,6 +137,8 @@ async def on_message(message):
 			else:
 				await message.channel.send('No valid file found; be sure to include an .mxd build file in your !popmenu request.')			
 		print('')
+		
+
 		return
 
 		
