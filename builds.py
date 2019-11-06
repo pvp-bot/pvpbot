@@ -245,13 +245,17 @@ def buildPop(url):
 		print(str(count)+' enhancements total')
 
 		with open('mnu/mxd.mnu',mode='w') as menu:
-			menu.write('//POPMENU generated from Mids .mxd file\n')
+			menu.write('//POPMENU generated from Mids .mxd file by @pvpbot on Homecoming PVP Discord\n')
 			menu.write('Menu "mxd"\n')
 			menu.write('{\n')
-			menu.write('\tDivider\n')
-			menu.write('\tTitle "Enhancements for Mids build"\n')
-			menu.write('\tOption "Step 1) lvl up" "levelup_xp 50"\n')
-			menu.write('\tOption "Step 2) first 70 enh" "'+string1+'"\n')
-			menu.write('\tOption "Step 3) remaining enh" "'+string2+'"\n')
+			menu.write('\tTitle "Mids build enhancements"\n')
+			menu.write('\tOption "1 - Level up" "levelup_xp 50"\n')
+			menu.write('\tOption "2 - Slot first 70 enhancements" "'+string1+'"\n')
+			menu.write('\tOption "3 - Slot remaining enhancements" "'+string2+'"\n')
+			menu.write('\tLockedOption\n')
+			menu.write('\t{\n')
+			menu.write('\t\tDisplayName "4 - Get your incarnates, boosters"\n')
+			menu.write('\t\tBadge "X"\n')
+			menu.write('\t}\n')
 			menu.write('}')
 		return True

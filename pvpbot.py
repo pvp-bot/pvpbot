@@ -112,23 +112,31 @@ async def on_message(message):
 			match = builds.parseSearch(message.content, rated)
 			if not match == False:
 				await message.channel.send(embed=buildEmbed(match))
+
 		elif '!builds' in message.content:
 			await message.channel.send(message.author.mention+' <http://bit.do/pvpbuilds>')
-		# elif '!test' in message.content and len(message.attachments) > 0:
-		# 	for a in message.attachments:
-		# 		if a.filename.endswith(builds.build_suf):
-		# 			ret = builds.buildPop(a.url)
-		# 			if ret:
-		# 				print('popmenu sent')
-		# 				await message.channel.send('',file=discord.File('mnu/mxd.mnu'))
-		# 			else:
-		# 				print('bad build format')
-		# 			break
+
+		elif '!popmenu' in message.content:
+			if len(message.attachments) > 0:
+				for a in message.attachments:
+					if a.size < 20000 and a.filename.endswith(builds.build_suf):
+						ret = builds.buildPop(a.url)
+						print(a.url)
+						if ret:
+							print('popmenu sent')
+							await message.channel.send('Place `mxd.mnu` in your COH folder under `\\data\\texts\\English\\menus\\`\nUse the command on test server with `/popmenu mxd` or `/macro mxd "popmenu mxd"`',file=discord.File('mnu/mxd.mnu'))
+							# await message.channel.send('Place `mxd.mnu` in your COH folder under `\\data\\texts\\English\\menus\\`\nCreate the folder if it doens\'t already exist\nUse the command on test server with `/popmenu mxd` or `/macro mxd "popmenu mxd"`\nUse the freebie menu linked below to get any other enhancements you may need\n<https://forums.homecomingservers.com/topic/3863-freebies-popmenu-give-yourself-levels-inf-and-enhancements/>',file=discord.File('mnu/mxd.mnu'))
+						else:
+							await message.channel.send('Unable to read your file. It may be incorrectly formatted, make sure the file has been saved from Mids or Pines as an .mxd file.')
+							print('bad build format')
+						break
+			else:
+				await message.channel.send('No valid file found; be sure to include an .mxd build file in your !popmenu request.')			
 		print('')
 		return
 
 		
-
+# reaction voting
 @client.event
 async def on_raw_reaction_add(payload):
 	if payload.emoji.name == '💯':
@@ -139,7 +147,6 @@ async def on_raw_reaction_add(payload):
 					builds.parseVote(msg)
 				except:
 					continue
-
 @client.event
 async def on_raw_reaction_remove(payload):
 	if payload.emoji.name == '💯':
