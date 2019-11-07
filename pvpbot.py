@@ -128,7 +128,7 @@ async def on_message(message):
 						ret = builds.buildPop(a.url)
 						if ret:
 							print('popmenu sent')
-							await message.channel.send('Place `mxd.mnu` in your COH folder under `\\data\\texts\\English\\menus\\`\nUse the command on test server with `/popmenu mxd` or `/macro mxd "popmenu mxd"`',file=discord.File('mnu/mxd.mnu'))
+							await message.channel.send('Place `mxd.mnu` in your COH folder under `\\data\\texts\\English\\menus\\`\nUse the command on test server with `/popmenu mxd` or `/macro mxd "popmenu mxd"`',file=discord.File('mxd.mnu'))
 							# await message.channel.send('Place `mxd.mnu` in your COH folder under `\\data\\texts\\English\\menus\\`\nCreate the folder if it doens\'t already exist\nUse the command on test server with `/popmenu mxd` or `/macro mxd "popmenu mxd"`\nUse the freebie menu linked below to get any other enhancements you may need\n<https://forums.homecomingservers.com/topic/3863-freebies-popmenu-give-yourself-levels-inf-and-enhancements/>',file=discord.File('mnu/mxd.mnu'))
 						else:
 							await message.channel.send('Unable to read your file. It may be incorrectly formatted, make sure the file has been saved from Mids or Pines as an .mxd file.')

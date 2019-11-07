@@ -114,6 +114,8 @@ def findBuild(at,pri,sec,rated):
 						emb['comment_url'] 	= row[12]
 						if not rated:
 							return emb
+						elif vote > 0:
+							return emb
 			except:
 				continue
 		if found:

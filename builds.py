@@ -244,7 +244,7 @@ def buildPop(url):
 			line = str(mxd.readline().decode('utf8'))
 		print(str(count)+' enhancements total')
 
-		with open('mnu/mxd.mnu',mode='w') as menu:
+		with open('mxd.mnu',mode='w') as menu:
 			menu.write('//POPMENU generated from Mids .mxd file by @pvpbot on Homecoming PVP Discord\n')
 			menu.write('Menu "mxd"\n')
 			menu.write('{\n')
