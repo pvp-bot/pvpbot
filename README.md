@@ -1,4 +1,6 @@
 
+![](https://i.imgur.com/MsvccZG.png)
+
 **requirements**  
 python3, [google python api](https://developers.google.com/sheets/api/quickstart/python#step_2_install_the_google_client_library), discord.[]()py, [a discord bot account](https://discordpy.readthedocs.io/en/latest/discord.html)
 
@@ -20,3 +22,4 @@ edit the spreadsheet range strings in gsheet.py
 votes are by 💯 reactions on build posts
   
 the enh.json has been formatted from the enhancement database from [Mids](https://github.com/ImaginaryDevelopment/imaginary-hero-designer)
+
