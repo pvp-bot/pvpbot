@@ -209,7 +209,7 @@ def parseVote(message):
 	gsheet.updateVote(msg_time,vote_count)
 
 
-def buildPop(url):
+def buildPop(url,filename):
 	mxd = urllib.request.urlopen(url)
 
 	if not 'Mids\'' in str(mxd.read().decode('utf8')):
@@ -248,7 +248,7 @@ def buildPop(url):
 			menu.write('//POPMENU generated from Mids .mxd file by @pvpbot on Homecoming PVP Discord\n')
 			menu.write('Menu "mxd"\n')
 			menu.write('{\n')
-			menu.write('\tTitle "Mids build enhancements"\n')
+			menu.write('\tTitle "'+filename+'"\n')
 			menu.write('\tOption "1 - Level up" "levelup_xp 50"\n')
 			menu.write('\tOption "2 - Slot first 70 enhancements" "'+string1+'"\n')
 			menu.write('\tOption "3 - Slot remaining enhancements" "'+string2+'"\n')

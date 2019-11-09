@@ -125,7 +125,7 @@ async def on_message(message):
 				for a in message.attachments:
 					if a.size < 20000 and a.filename.endswith(builds.build_suf):
 						await dm_chan.send(a.url)
-						ret = builds.buildPop(a.url)
+						ret = builds.buildPop(a.url,a.filename)
 						if ret:
 							print('popmenu sent')
 							await message.channel.send('Place `mxd.mnu` in your COH folder under `\\data\\texts\\English\\menus\\`\nUse the command on test server with `/popmenu mxd` or `/macro mxd "popmenu mxd"`',file=discord.File('mxd.mnu'))
