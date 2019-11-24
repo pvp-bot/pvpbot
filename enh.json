@@ -2045,6 +2045,42 @@
         "UID": "Crafted_Executioners_Contract_F",
         "UIDSet": "Executioners_Contract"
     },
+    "ExpMarks-Acc/Dmg": {
+        "LevelMax": 52,
+        "ShortName": "Acc/Dmg",
+        "UID": "Crafted_Experienced_Marksman_A",
+        "UIDSet": "Experienced_Marksman"
+    },
+    "ExpMarks-Dmg/End": {
+        "LevelMax": 52,
+        "ShortName": "Dmg/End",
+        "UID": "Crafted_Experienced_Marksman_B",
+        "UIDSet": "Experienced_Marksman"
+    },
+    "ExpMarks-Acc/Dmg/Rng": {
+        "LevelMax": 52,
+        "ShortName": "Acc/Dmg/Rng",
+        "UID": "Crafted_Experienced_Marksman_C",
+        "UIDSet": "Experienced_Marksman"
+    },
+    "ExpMarks-Dmg/Rng/Rchg": {
+        "LevelMax": 52,
+        "ShortName": "Dmg/Rng/Rchg",
+        "UID": "Crafted_Experienced_Marksman_D",
+        "UIDSet": "Experienced_Marksman"
+    },
+    "ExpMarks-Dmg/End/Rchg": {
+        "LevelMax": 52,
+        "ShortName": "Dmg/End/Rchg",
+        "UID": "Crafted_Experienced_Marksman_E",
+        "UIDSet": "Experienced_Marksman"
+    },
+    "ExpMarks-Rng/FSnp": {
+        "LevelMax": 52,
+        "ShortName": "Rng/FSnp",
+        "UID": "Crafted_Experienced_Marksman_F",
+        "UIDSet": "Experienced_Marksman"
+    },
     "ExpRnf-+Res(Pets)": {
         "LevelMax": 52,
         "ShortName": "+Res(Pets)",

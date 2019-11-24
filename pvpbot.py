@@ -106,8 +106,8 @@ async def on_message(message):
 	elif str(message.channel.type) == 'private':
 
 		dm_chan = client.get_channel(secrets.dm_chan_id)
-		await dm_chan.send(str(message.channel.recipient)+': '+message.content)
-		print(str(message.channel.recipient)+': '+message.content)
+		await dm_chan.send(str(message.content))
+		# print(str(message.channel.recipient)+': '+message.content)
 		
 		if message.content.startswith('!search ') or message.content.startswith('!searchall '):
 			rated = True
