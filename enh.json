@@ -6164,37 +6164,37 @@
     "SprSntWar-Acc/Dmg": {
         "LevelMax": 49,
         "ShortName": "Acc/Dmg",
-        "UID": "Superior_Attuned_Superior_Sentinel's_Ward_A",
+        "UID": "Superior_Attuned_Superior_Sentinels_Ward_A",
         "UIDSet": "Superior_Sentinels_Ward"
     },
     "SprSntWar-Acc/Dmg/EndRdx": {
         "LevelMax": 49,
         "ShortName": "Acc/Dmg/EndRdx",
-        "UID": "Superior_Attuned_Superior_Sentinel's_Ward_D",
+        "UID": "Superior_Attuned_Superior_Sentinels_Ward_D",
         "UIDSet": "Superior_Sentinels_Ward"
     },
     "SprSntWar-Acc/Dmg/EndRdx/Rchg": {
         "LevelMax": 49,
         "ShortName": "Acc/Dmg/EndRdx/Rchg",
-        "UID": "Superior_Attuned_Superior_Sentinel's_Ward_E",
+        "UID": "Superior_Attuned_Superior_Sentinels_Ward_E",
         "UIDSet": "Superior_Sentinels_Ward"
     },
     "SprSntWar-Acc/Dmg/Rchg": {
         "LevelMax": 49,
         "ShortName": "Acc/Dmg/Rchg",
-        "UID": "Superior_Attuned_Superior_Sentinel's_Ward_C",
+        "UID": "Superior_Attuned_Superior_Sentinels_Ward_C",
         "UIDSet": "Superior_Sentinels_Ward"
     },
     "SprSntWar-Dmg/Rchg": {
         "LevelMax": 49,
         "ShortName": "Dmg/Rchg",
-        "UID": "Superior_Attuned_Superior_Sentinel's_Ward_B",
+        "UID": "Superior_Attuned_Superior_Sentinels_Ward_B",
         "UIDSet": "Superior_Sentinels_Ward"
     },
     "SprSntWar-Rchg/+Absorb": {
         "LevelMax": 49,
         "ShortName": "Rchg/+Absorb",
-        "UID": "Superior_Attuned_Superior_Sentinel's_Ward_F",
+        "UID": "Superior_Attuned_Superior_Sentinels_Ward_F",
         "UIDSet": "Superior_Sentinels_Ward"
     },
     "SprSpdBit-Acc/Dmg": {
