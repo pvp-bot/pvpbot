@@ -62,6 +62,16 @@ def buildEmbed(match):
 	build_embed.set_author(name=auth, url=match['build_url'], icon_url=match['at_icon'])
 	return build_embed
 
+def search(message):
+	rated = True
+	if message.content.startswith('!searchall '):
+		rated = False
+	match = builds.parseSearch(message.content, rated)
+	if not match == False:
+		await message.channel.send(embed=buildEmbed(match))
+	else:
+		await message.channel.send('Could not find any builds, make sure your query is in the correct format: {} <AT> <PRIMARY> <SECONDARY>'.format(message.content.split(' ')[0]))
+
 @client.event
 async def on_message(message):
 	# ignore messages from ourself
@@ -89,13 +99,8 @@ async def on_message(message):
 			
 			# find matching build
 			elif message.content.startswith('!search ') or message.content.startswith('!searchall '):
-				rated = True
-				if message.content.startswith('!searchall '):
-					rated = False
-				match = builds.parseSearch(message.content, rated)
-				if not match == False:
-					await message.channel.send(embed=buildEmbed(match))
-				print('')
+				search(message)
+				print('you shouldnt print empty strings')
 				return
 			
 			## not in use		
@@ -110,12 +115,7 @@ async def on_message(message):
 		# print(str(message.channel.recipient)+': '+message.content)
 		
 		if message.content.startswith('!search ') or message.content.startswith('!searchall '):
-			rated = True
-			if message.content.startswith('!searchall '):
-				rated = False
-			match = builds.parseSearch(message.content, rated)
-			if not match == False:
-				await message.channel.send(embed=buildEmbed(match))
+			search(message)
 
 		elif '!builds' in message.content:
 			await message.channel.send(message.author.mention+' <http://bit.do/pvpbuilds>')
