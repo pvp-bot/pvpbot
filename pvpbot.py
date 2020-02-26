@@ -62,7 +62,7 @@ def buildEmbed(match):
 	build_embed.set_author(name=auth, url=match['build_url'], icon_url=match['at_icon'])
 	return build_embed
 
-def search(message):
+async def search(message):
 	rated = True
 	if message.content.startswith('!searchall '):
 		rated = False
@@ -70,7 +70,7 @@ def search(message):
 	if not match == False:
 		await message.channel.send(embed=buildEmbed(match))
 	else:
-		await message.channel.send('Could not find any builds, make sure your query is in the correct format: {} <AT> <PRIMARY> <SECONDARY>'.format(message.content.split(' ')[0]))
+		await message.channel.send('Could not find any builds, make sure your query is in the correct format: \n `{} <AT> <PRIMARY> <SECONDARY>` \n or search the spreadsheet <http://bit.do/pvpbuilds>'.format(message.content.split(' ')[0]))
 
 @client.event
 async def on_message(message):
@@ -99,8 +99,8 @@ async def on_message(message):
 			
 			# find matching build
 			elif message.content.startswith('!search ') or message.content.startswith('!searchall '):
-				search(message)
-				print('you shouldnt print empty strings')
+				await search(message)
+				print('you shouldnt print empty strings') # ok
 				return
 			
 			## not in use		
@@ -111,7 +111,7 @@ async def on_message(message):
 	elif str(message.channel.type) == 'private':
 
 		dm_chan = client.get_channel(secrets.dm_chan_id)
-		await dm_chan.send(str(message.content))
+		# await dm_chan.send(str(message.content))
 		# print(str(message.channel.recipient)+': '+message.content)
 		
 		if message.content.startswith('!search ') or message.content.startswith('!searchall '):
@@ -124,14 +124,15 @@ async def on_message(message):
 			if len(message.attachments) > 0:
 				for a in message.attachments:
 					if a.size < 20000 and a.filename.endswith(builds.build_suf):
-						await dm_chan.send(a.url)
 						ret = builds.buildPop(a.url,a.filename)
 						if ret:
 							print('popmenu sent')
+							await dm_chan.send('popmenu used (success)')
 							await message.channel.send('Place `mxd.mnu` in your COH folder under `\\data\\texts\\English\\menus\\`\nUse the command on test server with `/popmenu mxd` or `/macro mxd "popmenu mxd"`',file=discord.File('mxd.mnu'))
 							# await message.channel.send('Place `mxd.mnu` in your COH folder under `\\data\\texts\\English\\menus\\`\nCreate the folder if it doens\'t already exist\nUse the command on test server with `/popmenu mxd` or `/macro mxd "popmenu mxd"`\nUse the freebie menu linked below to get any other enhancements you may need\n<https://forums.homecomingservers.com/topic/3863-freebies-popmenu-give-yourself-levels-inf-and-enhancements/>',file=discord.File('mnu/mxd.mnu'))
 						else:
 							await message.channel.send('Unable to read your file. It may be incorrectly formatted, make sure the file has been saved from Mids or Pines as an .mxd file.')
+							await dm_chan.send('popmenu used (failure)')
 							print('bad build format')
 						break
 			else:
