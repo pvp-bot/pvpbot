@@ -100,7 +100,7 @@ async def on_message(message):
 			# find matching build
 			elif message.content.startswith('!search ') or message.content.startswith('!searchall '):
 				await search(message)
-				print('you shouldnt print empty strings') # ok
+				# print('you shouldnt print empty strings') # ok
 				return
 			
 			## not in use		
@@ -115,7 +115,7 @@ async def on_message(message):
 		# print(str(message.channel.recipient)+': '+message.content)
 		
 		if message.content.startswith('!search ') or message.content.startswith('!searchall '):
-			search(message)
+			await search(message)
 
 		elif '!builds' in message.content:
 			await message.channel.send(message.author.mention+' <http://bit.do/pvpbuilds>')
@@ -137,7 +137,7 @@ async def on_message(message):
 						break
 			else:
 				await message.channel.send('No valid file found; be sure to include an .mxd build file in your !popmenu request.')			
-		print('')
+		# print('')
 		
 
 		return
