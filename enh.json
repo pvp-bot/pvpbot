@@ -341,6 +341,42 @@
         "UID": "Crafted_Armageddon_B",
         "UIDSet": "Armageddon"
     },
+    "Artl-Acc/Dam": {
+        "LevelMax": 52,
+        "ShortName": "Dmg/Rchg",
+        "UID": "Crafted_Artillery_A",
+        "UIDSet": "Artillery"
+    },
+    "Artl-Dam/End": {
+        "LevelMax": 52,
+        "ShortName": "Dam/End",
+        "UID": "Crafted_Artillery_B",
+        "UIDSet": "Artillery"
+    },
+    "Artl-Dam/Rech": {
+        "LevelMax": 52,
+        "ShortName": "Dam/Rech",
+        "UID": "Crafted_Artillery_C",
+        "UIDSet": "Artillery"
+    },
+    "Artl-Acc/Dam/Rech": {
+        "LevelMax": 52,
+        "ShortName": "Acc/Dam/Rech",
+        "UID": "Crafted_Artillery_D",
+        "UIDSet": "Artillery"
+    },
+    "Artl-Acc/Rech/Rng": {
+        "LevelMax": 52,
+        "ShortName": "Acc/Rech/Rng",
+        "UID": "Crafted_Artillery_E",
+        "UIDSet": "Artillery"
+    },
+    "Artl-End/Rech/Rng": {
+        "LevelMax": 52,
+        "ShortName": "End/Rech/Rng",
+        "UID": "Crafted_Artillery_F",
+        "UIDSet": "Artillery"
+    },
     "AscoftheD-Acc/Conf/Hold/Immob/Sleep/Stun/Fear": {
         "LevelMax": -1,
         "ShortName": "Acc/Conf/Hold/Immob/Sleep/Stun/Fear",
@@ -604,6 +640,42 @@
         "ShortName": "Travel/EndRdx",
         "UID": "Crafted_Blessing_of_the_Zephyr_B",
         "UIDSet": "Blessing_of_the_Zephyr"
+    },
+    "Bmbdmt-Dam": {
+        "LevelMax": 52,
+        "ShortName": "Dam",
+        "UID": "Crafted_Bombardment_A",
+        "UIDSet": "Bombardment"
+    },
+    "Bmbdmt-Acc/Rech/End": {
+        "LevelMax": 52,
+        "ShortName": "Acc/Rech/End",
+        "UID": "Crafted_Bombardment_B",
+        "UIDSet": "Bombardment"
+    },
+    "Bmbdmt-Dam/Rech": {
+        "LevelMax": 52,
+        "ShortName": "Dam/Rech",
+        "UID": "Crafted_Bombardment_C",
+        "UIDSet": "Bombardment"
+    },
+    "Bmbdmt-Acc/Dam/Rech": {
+        "LevelMax": 52,
+        "ShortName": "Acc/Dam/Rech",
+        "UID": "Crafted_Bombardment_D",
+        "UIDSet": "Bombardment"
+    },
+    "Bmbdmt-Acc/Dam/Rech/End": {
+        "LevelMax": 52,
+        "ShortName": "Acc/Dam/Rech/End",
+        "UID": "Crafted_Bombardment_E",
+        "UIDSet": "Bombardment"
+    },
+    "Bmbdmt-+FireDmg": {
+        "LevelMax": 52,
+        "ShortName": "+FireDmg",
+        "UID": "Crafted_Bombardment_F",
+        "UIDSet": "Bombardment"
     },
     "Bns-Acc/Dmg": {
         "LevelMax": 24,
@@ -2051,27 +2123,27 @@
         "UID": "Crafted_Experienced_Marksman_A",
         "UIDSet": "Experienced_Marksman"
     },
-    "ExpMarks-Dmg/End": {
+    "ExpMarks-Dmg/Rech": {
         "LevelMax": 52,
-        "ShortName": "Dmg/End",
+        "ShortName": "Dmg/Rech",
         "UID": "Crafted_Experienced_Marksman_B",
         "UIDSet": "Experienced_Marksman"
     },
-    "ExpMarks-Acc/Dmg/Rng": {
+    "ExpMarks-Dmg/End/Int": {
         "LevelMax": 52,
-        "ShortName": "Acc/Dmg/Rng",
+        "ShortName": "Dmg/End/Int",
         "UID": "Crafted_Experienced_Marksman_C",
         "UIDSet": "Experienced_Marksman"
     },
-    "ExpMarks-Dmg/Rng/Rchg": {
+    "ExpMarks-Acc/End/Rech": {
         "LevelMax": 52,
-        "ShortName": "Dmg/Rng/Rchg",
+        "ShortName": "Acc/End/Rech",
         "UID": "Crafted_Experienced_Marksman_D",
         "UIDSet": "Experienced_Marksman"
     },
-    "ExpMarks-Dmg/End/Rchg": {
+    "ExpMarks-Dmg/Int/Rng/Rech": {
         "LevelMax": 52,
-        "ShortName": "Dmg/End/Rchg",
+        "ShortName": "Dmg/Int/Rng/Rech",
         "UID": "Crafted_Experienced_Marksman_E",
         "UIDSet": "Experienced_Marksman"
     },
@@ -2081,7 +2153,7 @@
         "UID": "Crafted_Experienced_Marksman_F",
         "UIDSet": "Experienced_Marksman"
     },
-    "ExpRnf-+Res(Pets)": {
+    "ExpRnf-+Res": {
         "LevelMax": 52,
         "ShortName": "+Res(Pets)",
         "UID": "Crafted_Expedient_Reinforcement_F",
@@ -4289,6 +4361,42 @@
         "UID": "Crafted_Pounding_Slugfest_D",
         "UIDSet": "Pounding_Slugfest"
     },
+    "PreOptmz-Acc/Rech": {
+        "LevelMax": 52,
+        "ShortName": "Acc/Rech",
+        "UID": "Crafted_Preemptive_Optimization_A",
+        "UIDSet": "Preemptive_Optimization"
+    },
+    "PreOptmz-EndMod/End": {
+        "LevelMax": 52,
+        "ShortName": "EndMod/End",
+        "UID": "Crafted_Preemptive_Optimization_B",
+        "UIDSet": "Preemptive_Optimization"
+    },
+    "PreOptmz-EndMod/Rech": {
+        "LevelMax": 52,
+        "ShortName": "EndMod/Rech",
+        "UID": "Crafted_Preemptive_Optimization_C",
+        "UIDSet": "Preemptive_Optimization"
+    },
+    "PreOptmz-EndMod/Acc/End": {
+        "LevelMax": 52,
+        "ShortName": "EndMod/Acc/End",
+        "UID": "Crafted_Preemptive_Optimization_D",
+        "UIDSet": "Preemptive_Optimization"
+    },
+    "PreOptmz-EndMod/Acc/Rech": {
+        "LevelMax": 52,
+        "ShortName": "EndMod/Acc/Rech",
+        "UID": "Crafted_Preemptive_Optimization_E",
+        "UIDSet": "Preemptive_Optimization"
+    },
+    "PreOptmz-EndMod/End/Rech": {
+        "LevelMax": 52,
+        "ShortName": "EndMod/End/Rech",
+        "UID": "Crafted_Preemptive_Optimization_F",
+        "UIDSet": "Preemptive_Optimization"
+    },
     "PrfShf-Acc/Rchg": {
         "LevelMax": 52,
         "ShortName": "Acc/Rchg",
@@ -4498,6 +4606,42 @@
         "ShortName": "Dmg/Rng",
         "UID": "Crafted_Positrons_Blast_D",
         "UIDSet": "Positrons_Blast"
+    },
+    "PwrTrns-EndMod": {
+        "LevelMax": 52,
+        "ShortName": "EndMod",
+        "UID": "Crafted_Power_Transfer_A",
+        "UIDSet": "Power_Transfer"
+    },
+    "PwrTrns-Dam/Rech": {
+        "LevelMax": 52,
+        "ShortName": "Dam/Rech",
+        "UID": "Crafted_Power_Transfer_B",
+        "UIDSet": "Power_Transfer"
+    },
+    "PwrTrns-Dam/EndMod": {
+        "LevelMax": 52,
+        "ShortName": "Dam/EndMod",
+        "UID": "Crafted_Power_Transfer_C",
+        "UIDSet": "Power_Transfer"
+    },
+    "PwrTrns-Dam/Acc/End": {
+        "LevelMax": 52,
+        "ShortName": "Dam/Acc/End",
+        "UID": "Crafted_Power_Transfer_D",
+        "UIDSet": "Power_Transfer"
+    },
+    "PwrTrns-Dam/Acc/Rech/End": {
+        "LevelMax": 52,
+        "ShortName": "Dam/Acc/Rech/End",
+        "UID": "Crafted_Power_Transfer_E",
+        "UIDSet": "Power_Transfer"
+    },
+    "PwrTrns-+Heal": {
+        "LevelMax": 52,
+        "ShortName": "+Heal",
+        "UID": "Crafted_Power_Transfer_F",
+        "UIDSet": "Power_Transfer"
     },
     "Qck-EndRdx": {
         "LevelMax": 52,
@@ -6688,6 +6832,42 @@
         "ShortName": "PetResDam",
         "UID": "Crafted_Sovereign_Right_F",
         "UIDSet": "Sovereign_Right"
+    },
+    "SynSck-EndMod": {
+        "LevelMax": 52,
+        "ShortName": "EndMod",
+        "UID": "Crafted_Synapses_Shock_A",
+        "UIDSet": "Synapses_Shock"
+    },
+    "SynSck-Dam/Rech": {
+        "LevelMax": 52,
+        "ShortName": "Dam/Rech",
+        "UID": "Crafted_Synapses_Shock_B",
+        "UIDSet": "Synapses_Shock"
+    },
+    "SynSck-EndMod/Rech": {
+        "LevelMax": 52,
+        "ShortName": "EndMod/Rech",
+        "UID": "Crafted_Synapses_Shock_C",
+        "UIDSet": "Synapses_Shock"
+    },
+    "SynSck-Dam/Rech/Acc": {
+        "LevelMax": 52,
+        "ShortName": "Dam/Rech/Acc",
+        "UID": "Crafted_Synapses_Shock_D",
+        "UIDSet": "Synapses_Shock"
+    },
+    "SynSck-Dam/Acc/End": {
+        "LevelMax": 52,
+        "ShortName": "Dam/Acc/End",
+        "UID": "Crafted_Synapses_Shock_E",
+        "UIDSet": "Synapses_Shock"
+    },
+    "SynSck-EndMod/+RunSpeed": {
+        "LevelMax": 52,
+        "ShortName": "EndMod/+RunSpeed",
+        "UID": "Crafted_Synapses_Shock_F",
+        "UIDSet": "Synapses_Shock"
     },
     "TN:AmeShard": {
         "LevelMax": 52,
