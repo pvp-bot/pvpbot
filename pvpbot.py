@@ -70,7 +70,7 @@ async def search(message):
 	if not match == False:
 		await message.channel.send(embed=buildEmbed(match))
 	else:
-		await message.channel.send('Could not find any builds, make sure your query is in the correct format: \n `{} <AT> <PRIMARY> <SECONDARY>` \n or search the spreadsheet <http://bit.do/pvpbuilds>'.format(message.content.split(' ')[0]))
+		await message.channel.send('Could not find any builds, make sure your query is in the correct format: \n `{} <AT> <PRIMARY> <SECONDARY>` \n or search the spreadsheet <https://docs.google.com/spreadsheets/d/1FNejy_CHV4Khr9dy3m7wn8-J0OARwrSbHcKmkBRuG1Y/>'.format(message.content.split(' ')[0]))
 
 @client.event
 async def on_message(message):
@@ -95,7 +95,7 @@ async def on_message(message):
 			
 			# link to spreadsheet
 			if '!builds' in message.content:
-				await message.channel.send(message.author.mention+' <http://bit.do/pvpbuilds>')
+				await message.channel.send(message.author.mention+' <https://docs.google.com/spreadsheets/d/1FNejy_CHV4Khr9dy3m7wn8-J0OARwrSbHcKmkBRuG1Y/>')
 			
 			# find matching build
 			elif message.content.startswith('!search ') or message.content.startswith('!searchall '):
@@ -111,19 +111,18 @@ async def on_message(message):
 	elif str(message.channel.type) == 'private':
 
 		dm_chan = client.get_channel(secrets.dm_chan_id)
-		# await dm_chan.send(str(message.content))
-		# print(str(message.channel.recipient)+': '+message.content)
 		
 		if message.content.startswith('!search ') or message.content.startswith('!searchall '):
 			await search(message)
 
 		elif '!builds' in message.content:
-			await message.channel.send(message.author.mention+' <http://bit.do/pvpbuilds>')
+			await message.channel.send(message.author.mention+' <https://docs.google.com/spreadsheets/d/1FNejy_CHV4Khr9dy3m7wn8-J0OARwrSbHcKmkBRuG1Y/>')
 
 		elif '!popmenu' in message.content:
 			if len(message.attachments) > 0:
 				for a in message.attachments:
 					if a.size < 20000 and a.filename.endswith(builds.build_suf):
+						await dm_chan.send(a.url)
 						ret = builds.buildPop(a.url,a.filename)
 						if ret:
 							print('popmenu sent')

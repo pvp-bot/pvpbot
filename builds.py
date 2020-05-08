@@ -41,7 +41,10 @@ aliases_pow = {
 	'wp':'Willpower', 
 	# 'em':'Energy Melee'
 	'ff':'Force Field',
-	# 'ta':'Trick'
+	# 'ta':'Trick',
+	'dev':'Gadgets',
+	'device':'Gadgets',
+	'devices':'Gadgets',
 }
 
 # change request header so Discord doesn't 403 the urlrequests
