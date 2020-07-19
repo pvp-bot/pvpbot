@@ -13,6 +13,7 @@ bot_builds = '!builds'
 
 client = discord.Client()
 
+
 # dl all builds from most recent, number is how many mesgs to parse.
 async def dlAll(dl_num=None):
 	if dl_num:
@@ -103,10 +104,29 @@ async def on_message(message):
 				# print('you shouldnt print empty strings') # ok
 				return
 			
-			## not in use		
-			# elif '!kickball' in message.content:
-			# 	await message.channel.send('kickball weds and sat nights @ 6 pm pacific, check out the link for rules and more info \n<https://forums.homecomingservers.com/topic/1492-weekly-kickball-thread/>')
 	
+	# mod actions
+	elif message.channel.id == secrets.action_channel:
+		guild = client.get_guild(secrets.guild_id)
+		timeout_role = guild.get_role(secrets.timeout_id)
+		if '!timeout' in message.content:
+			try:
+				tuser_name = message.content.split(None,1)[1]
+				tuser = guild.get_member_named(tuser_name)
+				await tuser.add_roles(timeout_role)
+				await message.channel.send(str(tuser) + ' has been timed out')
+			except:
+				await message.channel.send('No user found or role could not be added')
+
+		elif '!untimeout' in message.content:
+			try:
+				tuser_name = message.content.split(None,1)[1]
+				tuser = guild.get_member_named(tuser_name)
+				await tuser.remove_roles(timeout_role)
+				await message.channel.send(str(tuser) + '\'s timeout has been lifted')
+			except:
+				await message.channel.send('No user found or role could not be added')
+
 	# DM bot directly
 	elif str(message.channel.type) == 'private':
 
@@ -122,7 +142,6 @@ async def on_message(message):
 			if len(message.attachments) > 0:
 				for a in message.attachments:
 					if a.size < 20000 and a.filename.endswith(builds.build_suf):
-						await dm_chan.send(a.url)
 						ret = builds.buildPop(a.url,a.filename)
 						if ret:
 							print('popmenu sent')
@@ -164,5 +183,18 @@ async def on_raw_reaction_remove(payload):
 				except:
 					continue
 
+@client.event
+async def on_raw_message_delete(payload):
+	try:
+		message = payload.cached_message
+		deleted_channel = client.get_channel(secrets.deleted_channel)
+		guild = client.get_guild(secrets.guild_id)
+		if message.guild == guild:
+			await deleted_channel.send(str(message.created_at) + '\n' + str(message.author) + ': ' + message.content)
+			if len(message.attachments) > 0:
+				for a in message.attachments:
+					await deleted_channel.send(a.url)
+	except:
+		await deleted_channel.send('Error: deleted message was not in message cache')
 
 client.run(secrets.bot_token)
