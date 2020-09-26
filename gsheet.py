@@ -16,7 +16,9 @@ SEARCH_RANGE = 'DB!A10:N1000' # need to increase if we start getting to 1000
 TIME_RANGE 	 = 'DB!B10:B1000'
 
 creds = None
-# The file token.pickle stores the user's access and refresh tokens, and is created automatically when the authorization flow completes for the first time.
+# The file token.pickle stores the user's access and refresh tokens, and is
+# created automatically when the authorization flow completes for the first
+# time.
 if os.path.exists('token.pickle'):
 	with open('token.pickle', 'rb') as token:
 		creds = pickle.load(token)
@@ -31,7 +33,7 @@ if not creds or not creds.valid:
 	# Save the credentials for the next run
 	with open('token.pickle', 'wb') as token:
 		pickle.dump(creds, token)
-
+			
 service = build('sheets', 'v4', credentials=creds)
 # Call the Sheets API
 sheet 	= service.spreadsheets()
