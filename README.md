@@ -1,8 +1,6 @@
 
 ![](https://i.imgur.com/MsvccZG.png)
 
-**repo migrated to https://github.com/pvp-bot/pvpbot**
-
 **requirements**  
 python3, [google python api](https://developers.google.com/sheets/api/quickstart/python#step_2_install_the_google_client_library), discord.[]()py, [a discord bot account](https://discordpy.readthedocs.io/en/latest/discord.html)
 
