@@ -215,7 +215,7 @@ def parseVote(message):
 def buildPop(url,filename):
 	mxd = urllib.request.urlopen(url)
 
-	if not 'Mids\'' in str(mxd.read().decode('utf8')):
+	if not 'Mids' in str(mxd.read().decode('utf8')):
 		return False
 	with open('enh.json') as e:
 		data = json.load(e)

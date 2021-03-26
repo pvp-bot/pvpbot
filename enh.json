@@ -857,7 +857,7 @@
         "UID": "Crafted_Call_of_the_Sandman_D",
         "UIDSet": "Call_of_the_Sandman"
     },
-    "CaltoArm-+Def(Pets)": {
+    "CaltoArm-+Def": {
         "LevelMax": 29,
         "ShortName": "+Def(Pets)",
         "UID": "Crafted_Call_to_Arms_F",
@@ -5652,6 +5652,12 @@
         "UIDSet": "Superior_Brutes_Fury"
     },
     "SprBrtFur-Rech/Fury": {
+        "LevelMax": -1,
+        "ShortName": "Rech/Fury",
+        "UID": "Superior_Attuned_Superior_Brutes_Fury_F",
+        "UIDSet": "Superior_Brutes_Fury"
+    },
+    "SprBrtFur-Rech/Fury%": {
         "LevelMax": -1,
         "ShortName": "Rech/Fury",
         "UID": "Superior_Attuned_Superior_Brutes_Fury_F",
